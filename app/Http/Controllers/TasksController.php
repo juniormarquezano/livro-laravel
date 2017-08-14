@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 
 class TasksController extends Controller
 {
+    private $task;
+
+    public function __construct(Task $task)
+    {
+        $this->task = $task;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +27,13 @@ class TasksController extends Controller
         //$modules = []; // Para ser testado com @each()
         $modules = ['module1', 'module2', 'module3', 'module4', 'module5'];
 
-        return view('tasks.index')->with(compact('tasks', 'pages', 'modules'));
+        // TODO - Capítulo 5 - Paginação
+        $tasks = $this->task->paginate(2);
+
+        // TODO - Capítulo 5 - Componentes frontend - Pluralização
+        $numTasksDeleted = 7;
+
+        return view('tasks.index')->with(compact('tasks', 'pages', 'modules', 'numTasksDeleted'));
     }
 
     /**
@@ -72,7 +85,11 @@ class TasksController extends Controller
      */
     public function show(Task $task) // Utilizando a vinculação rota modelo explícita
     {
-        return view('tasks.show')->with('task', $task);
+        // TODO - Capítulo 5 - Componentes frontend - Usando uma tradução
+        // O mais correto seria criar um provedor de serviços para pegar a localização do usuário
+        App::setLocale('es');
+
+        return view('tasks.show')->with(compact('tasks'));
     }
 
     /**

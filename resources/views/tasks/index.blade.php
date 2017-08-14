@@ -11,6 +11,7 @@
         <tr>
             <th class="text-left">Tasks</th>
             <th></th>
+            <th>Ações</th>
         </tr>
         </thead>
         <tbody>
@@ -18,10 +19,13 @@
         <tr>
             <td>{{ $task->name }}</td>
             <td>{{ $task->description }}</td>
+            <td><a href="{{ route('tasks.show', $task->id) }}" class="btn btn-xs btn-primary">Show</a></td>
         </tr>
         @endforeach
         </tbody>
     </table>
+
+    {{ $tasks->links() }}
 
     <h2>Capítulo 4 - Templates do Blade</h2>
     <h3>Estruturas de Controle</h3>
@@ -92,6 +96,14 @@
         <br>
         @<span>each()</span>
         @include('partials.sidebar')
+        <br>
+        <!-- TODO - Componentes frontend - Pluralização -->
+        <h2>Capítulo 5 - Componentes frontend</h2>
+        <h3>Pluralização</h3>
+        @if($numTasksDeleted > 0)
+            {{ trans_choice('messages.task-deletion', $numTasksDeleted) }}
+        @endif
+
     </div>
 
 @endsection

@@ -26,3 +26,8 @@
 @else
     <p>&copy; Copyright Client 1</p>
 @endif
+
+<!-- TODO - Componentes frontend - Usando uma tradução -->
+{{--<a href="{{ route('tasks.index') }}">{{ __('navigation.back') }}</a> --}}
+<!-- TODO - Componentes frontend - Parâmetros em traduções -->
+<a href="{{ route('tasks.index') }}">{{ __('navigation.back', ['section' => 'Tasks']) }}</a>

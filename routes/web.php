@@ -145,4 +145,50 @@ Route::get('backend/sales', function () {
     return view('backend.sales');
 });
 
+// TODO - Capítulo 5 - Componentes frontend
+// Message bags
+Route::get('message-bags', function () {
+
+    $messages = [
+        'errors' => [
+            'Something went wrong with edit 1!'
+        ],
+        'message' => [
+            'Edit 2 was successful.'
+        ],
+    ];
+
+    $messagebag = new \Illuminate\Support\MessageBag($messages);
+
+    //dd($messagebag);
+
+    if ($messagebag->has('errors')) {
+        echo '<ul id="errors">';
+        foreach ($messagebag->get('errors', '<li><b>:message</b></li>') as $error) {
+            echo $error;
+        }
+        echo '</ul>';
+
+    }
+});
+
+// Helpers de String
+Route::get('helpers-string', function () {
+
+    $string = 'O rato roeu a roupa de rei de roma.';
+
+    echo "<p>$string</p>";
+
+    // starts_with, ends_with, str_contains = começa com, termina com ou contém
+    //dd(starts_with($string, 'O')); // true
+    //dd(ends_with($string, 'frança')); // false
+    //dd(str_contains($string, 'a')); // true
+
+    // str_is = encontra correspondência
+    //dd(str_is('foo*', 'foobar')); // true
+
+    // str_slug
+    dd(str_slug($string, '-')); // o-rato-roeu-a-roupa-de-rei-de-roma
+
+});
 
