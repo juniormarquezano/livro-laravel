@@ -8,5 +8,21 @@
 </a>
 --}}
 
+<!-- TODO - View Composer - Mostrar o carregando de uma variável passada para determinadas views -->
+@include('partials.header')
+@include('partials.sidebar')
+
 <h2>{{ $task->name }}</h2>
 <p>{{ $task->description }}</p>
+
+<!-- TODO - Diretivas personalizadas do Blade -->
+@isTest
+
+<!-- TODO - Parâmetros em diretivas personalizadas do Blade -->
+<p>@newlinesToBr('<br>') test</p>
+
+@ifPublic()
+    <p>&copy; Copyright MyApp LLC</p>
+@else
+    <p>&copy; Copyright Client 1</p>
+@endif

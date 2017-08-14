@@ -15,9 +15,12 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $tasks = Task::query()->get();
+        //$tasks = Task::query()->get(); // TODO - ViewComposer - Comentado para demostrar a passagem de variável
+        $pages = ['page1', 'page2', 'page3', 'page4']; // Para ser testado o $loop dentro do foreach
+        //$modules = []; // Para ser testado com @each()
+        $modules = ['module1', 'module2', 'module3', 'module4', 'module5'];
 
-        return view('tasks.index')->with('tasks', $tasks);
+        return view('tasks.index')->with(compact('tasks', 'pages', 'modules'));
     }
 
     /**

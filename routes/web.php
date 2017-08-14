@@ -131,4 +131,18 @@ Route::prefix('controladores')->group(function () {
     Route::resource('tasks', 'TasksController');
 });
 
+// TODO - Capítulo 4 - Templates do Blade
+// 1ª opção - Injeção de serviços do Blade
+/*
+Route::get('backend/sales', function (\App\Services\AnalyticsService $analytics) {
+    //return $analytics->getBalance();
+    // Serviço de navegação injetado na view
+    return view('backend.sales')->with('analytics', $analytics);
+});
+*/
+// 2ª opção - Injetando diretamente na view com @inject()
+Route::get('backend/sales', function () {
+    return view('backend.sales');
+});
+
 
