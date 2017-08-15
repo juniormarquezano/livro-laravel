@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTaskRequest;
 use App\Task;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
@@ -52,8 +54,71 @@ class TasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateTaskRequest $request)
     {
+        // TODO - Capítulo 6 - Coletando e manipulando dados do usuário
+        //dd($request->all());
+        //dd($request->except('_token'));
+        //dd($request->only(['name', 'description']));
+        //dd($request->input('name'));
+        //dd($request->input('employees'));
+        //dd($request->input('employees.*.firstName'));
+        //dd($request->input('employees.0.firstName'));
+        //$employeeOne = $request->input('employees.1');
+        //dd($employeeOne['firstName'] . ' ' . $employeeOne['lastName']);
+
+        // TODO - Capítulo 6 - Coletando e manipulando dados do usuário - Upload de Arquivos
+        /*
+        if ($request->hasFile('profile_picture')) {
+            dd($request->file('profile_picture'));
+        }
+        */
+        // Validando um upload
+        /*
+        if ($request->hasFile('profile_picture') &&
+            $request->file('profile_picture')->isValid()) {
+
+            // Recuperando o arquivo
+            $image = $request->file('profile_picture');
+
+            //echo $image->getMimeType(); // retorna o tipo do arquivo
+            //echo $image->getClientOriginalName(); // retorna o nome do arquivo
+            //echo $image->getClientOriginalExtension(); // retorna a extensão do arquivo
+            //echo $image->getClientMimeType(); // retorna o tipo do arquivo
+            //echo $image->guessClientExtension(); // retorna a extensão do arquivo (melhor usar esse)
+            //echo $image->getClientSize(); // retorna o tamanho do arquivo
+            //echo $image->getError(); //retorna se o arquivo contém algum erro
+
+            //$image->store('public/profiles', 'local'); // Transfere o arquivo e nomeia automaticamente
+            //$image->storeAs('public/profiles', 'teste.jpeg', 'local'); // Transfere o arquivo e nomeia manualmente
+
+            exit();
+        }
+        */
+
+        // TODO - Capítulo 6 - Coletando e manipulando dados do usuário - Validação
+        // Valida e emite as mensagens de erro automaticamente
+        /*
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+        */
+        // Validação Manual
+        /*
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('tasks.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        */
+
         /* Usando a facade Input::
         $tasks = new Task;
         $tasks->name = Input::get('name');
